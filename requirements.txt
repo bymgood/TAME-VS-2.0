@@ -11,5 +11,5 @@ imbalanced-learn==0.12.4
 tqdm==4.67.1
 requests==2.32.4
 easydict==1.13
-
+torch_geometric
 
