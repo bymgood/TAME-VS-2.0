@@ -6,7 +6,7 @@ echo The uniprot id you entered is $uniprot_ID
 echo Enter the working directory of this bash file of the screening package
 read directory_1
 echo The working directory is $directory_1
-echo Enter the working directory of the chembl.db database
+echo Enter the path to your chembl.db database file
 read directory_2
 echo CHEMBL Database path set to: $directory_2
 echo "Please select the database you would like to use for virtual screening:"
