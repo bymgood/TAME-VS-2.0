@@ -3,6 +3,12 @@
 echo Enter the uniprot id for the target of interest
 read uniprot_ID
 echo The uniprot id you entered is $uniprot_ID
+echo Enter the active compound list
+read active_list
+echo The active compound list you entered is $active_list
+echo Enter the inactive compound list
+read inactive_list
+echo The inactive compound list you entered is $inactive_list
 echo Enter the working directory of this bash file of the screening package
 read directory_1
 echo The working directory is $directory_1
@@ -50,23 +56,14 @@ else
 fi
 echo Let us get it started.
 
-# Module 1
-cd $directory_1/1_Target_expansion/
-python Target_expansion.py -i $uniprot_ID -f $uniprot_ID -p 0.4
-python Target_expansion2.py -i $uniprot_ID -f $uniprot_ID 
-cp $uniprot_ID'.csv' $directory_1/2_Compound_retrieving/
 
-# Module 2
-cd $directory_1/2_Compound_retrieving/
-python Compound_retrieving.py -i $uniprot_ID'.csv' -f $uniprot_ID'_compounds_collection'
-cp *compounds_collection* $directory_1/3_Vectorization/
 
 # Module 3
 cd $directory_1/3_Vectorization/
-python Vectorization.py -i 'actives_'$uniprot_ID'_compounds_collection.csv' -a active -f 'actives_'$uniprot_ID'_compounds_collection_fp'
-python Vectorization.py -i 'inactives_'$uniprot_ID'_compounds_collection.csv' -a inactive -f 'inactives_'$uniprot_ID'_compounds_collection_fp'
+python Vectorization.py -i $active_list -a active -f 'actives_'$active_list'_compounds_collection_fp'
+python Vectorization.py -i $inactive_list -a inactive -f 'inactives_'$inactive_list'_compounds_collection_fp'
 
-python GNN_data_split.py --input_inactives 'inactives_'$uniprot_ID'_compounds_collection.csv' --input_actives 'actives_'$uniprot_ID'_compounds_collection.csv' -u $uniprot_ID
+python GNN_data_split.py --input_inactives $inactive_list --input_actives $active_list -u $uniprot_ID
 python GNN_Vectorization.py -i $uniprot_ID'_gnn_train_data.csv'
 python GNN_Vectorization.py -i $uniprot_ID'_gnn_val_data.csv'
 

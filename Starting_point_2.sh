@@ -50,11 +50,6 @@ else
 fi
 echo Let us get it started.
 
-# Module 1
-cd $directory_1/1_Target_expansion/
-python Target_expansion.py -i $uniprot_ID -f $uniprot_ID -p 0.4
-python Target_expansion2.py -i $uniprot_ID -f $uniprot_ID 
-cp $uniprot_ID'.csv' $directory_1/2_Compound_retrieving/
 
 # Module 2
 cd $directory_1/2_Compound_retrieving/
