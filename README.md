@@ -8,22 +8,20 @@ Target-driven machine-learning-enabled virtual screening 2.0 is a machine learni
 The Starting_point[1-3].sh are the production scripts for launching vritual screening with different types of inputs. Clone the entire repository to your local machine prior to start.
 
 ##  Prerequisites
-
-1. **Install CUDA**
-
-   Download and install the appropriate version of CUDA for your system:  
-   [NVIDIA CUDA Toolkit Downloads](https://developer.nvidia.com/cuda-12-4-0-download-archive)
-
-2. **Install PyTorch compatible with your CUDA version**
-
-   Choose the matching PyTorch version for your CUDA environment here:  
-   [PyTorch Installation Guide](https://pytorch.org/get-started/previous-versions/)
-
-3. **Set up a Conda virtual environment (Python 3.9)**
+1. **Set up a Conda virtual environment (Python 3.9)**
 
    ```bash
    conda create -n TAME_VS2 python=3.9
    conda activate TAME_VS2
+2. **Install CUDA**
+
+   Download and install the appropriate version of CUDA for your system:  
+   [NVIDIA CUDA Toolkit Downloads](https://developer.nvidia.com/cuda-12-4-0-download-archive)
+
+3. **Install PyTorch compatible with your CUDA version**
+
+   Choose the matching PyTorch version for your CUDA environment here:  
+   [PyTorch Installation Guide](https://pytorch.org/get-started/previous-versions/)
 
 4. Install dependencies
 ```bash
