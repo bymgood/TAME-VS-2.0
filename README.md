@@ -8,7 +8,7 @@ Target-driven machine-learning-enabled virtual screening 2.0 is a machine learni
 The Starting_point[1-3].sh are the production scripts for launching vritual screening with different types of inputs. Clone the entire repository to your local machine prior to start.
 
 ##  Prerequisites
-1. **Set up a Conda virtual environment (Python 3.9)**
+1. **Set up a Conda virtual environment**
 
    ```bash
    conda create -n TAME_VS2 python=3.9
