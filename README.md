@@ -32,13 +32,7 @@ After downloading, extract the file:
 ```bash
 tar -xvzf chembl_36_sqlite.tar.gz
 ```
-In the script 2_Compound_retrieving/Compound_retrieving.py,
-locate the function get_compounds() and update the ChEMBL database path to match your local setup.
 
-For example:
-def get_compounds():
-    chembl_db_path = "/path/to/chembl_36.db"  # <-- Modify this path
-    ...
 
 # Preparing molecular fingerprints and molecular graph for virtual screening
 To use the included Enamine 50k compound library for final ML virtual screening, please run the followig command from **5_Virtural_screening**
