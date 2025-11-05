@@ -17,6 +17,7 @@ import numpy as np
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--input', help = "The target list for compound collection. Or simply the generated file from the Module 1", required=True)
 parser.add_argument('-f','--file_name', help = "A name to save out files...", required=True)
+parser.add_argument('-d','--database', help = "Path to the ChEMBL SQLite database file", required=True)
 args = parser.parse_args()
 
 # # Make functions
@@ -41,7 +42,7 @@ def protein_chembl_id(res):
 
     return target_chembl_id
 
-def get_compounds(target_chembl_id: str):
+def get_compounds(target_chembl_id: str, chembl_db_path: str):
     sql = """
     SELECT
         a.*,                          -- activities 
@@ -66,7 +67,7 @@ def get_compounds(target_chembl_id: str):
     JOIN target_dictionary td   ON asy.tid = td.tid
     WHERE td.chembl_id = ?
     """
-    with sqlite3.connect('/home/bianlab/Documents/chembl_35.db') as conn:
+    with sqlite3.connect(chembl_db_path) as conn:
         df = pd.read_sql_query(sql, conn, params=[target_chembl_id])
     print(f'{len(df)} rows returned for assay chembl_id = {target_chembl_id}')
     return df
@@ -152,7 +153,7 @@ for uniprot_id_one in df['uniprot id']:
     if len(res) > 0:
         chembl_id = protein_chembl_id(res)
         if chembl_id is not None: 
-            table = get_compounds(chembl_id)
+            table = get_compounds(chembl_id, args.database)
             combined = pd.concat([combined, table], ignore_index=True)
         else:
             print(f"No valid ChEMBL ID found for UniProt ID: {uniprot_id_one}")
