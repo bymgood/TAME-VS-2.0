@@ -6,6 +6,9 @@ echo The uniprot id you entered is $uniprot_ID
 echo Enter the working directory of this bash file of the screening package
 read directory_1
 echo The working directory is $directory_1
+echo Enter the working directory of the chembl.db database
+read directory_2
+echo CHEMBL Database path set to: $directory_2
 echo "Please select the database you would like to use for virtual screening:"
 echo "1. 50K Enamine diversity Library"
 echo "2. 4M Enamine Screening Library"
@@ -58,7 +61,7 @@ cp $uniprot_ID'.csv' $directory_1/2_Compound_retrieving/
 
 # Module 2
 cd $directory_1/2_Compound_retrieving/
-python Compound_retrieving.py -i $uniprot_ID'.csv' -f $uniprot_ID'_compounds_collection'
+python Compound_retrieving.py -i $uniprot_ID'.csv' -f $uniprot_ID'_compounds_collection' -d $directory_2
 cp *compounds_collection* $directory_1/3_Vectorization/
 
 # Module 3
