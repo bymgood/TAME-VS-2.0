@@ -48,7 +48,7 @@ python GNN_data_preparation.py -i Enamine_diversity_50K.csv -s 1 -c 2  -f Enamin
 ```
 In March 2024, we added a convert.py file to module 5_Virtual_screening. This convert.py can be used to convert a customized .sdf chemical library into the .csv format. Then the Library_preparation.py should be able to be used for fingerprints calculations.
 
-# Run target-driven machine-learning-enabled VS
+# Run target-driven machine-learning-enabled VS 2.0
 The following example uses starting point 1 as an example.
 1. Search for the uniport ID of your target proteins (e.g. P09238);
 2. Launch the ```Starting_point_1.sh``` script and provide uniport ID and working directory;
