@@ -10,9 +10,10 @@ The Starting_point[1-3].sh are the production scripts for launching vritual scre
 ##  Prerequisites
 1. **Set up a Conda virtual environment**
 
-   ```bash
+```bash
 conda create -n TAME_VS2 python=3.9
 conda activate TAME_VS2
+```
 2. **Install CUDA**
 
    Download and install the appropriate version of CUDA for your system:  
