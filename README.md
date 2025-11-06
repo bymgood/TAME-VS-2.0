@@ -56,3 +56,7 @@ The following example uses starting point 1 as an example.
 ```bash
 bash Starting_point_1.sh
 ```
+# More virtual screening libraries
+
+We provide **additional virtual-screening compound libraries** for you to choose from.  
+🔗 [Download here](https://drive.google.com/drive/folders/1XYkh7xBTUncYj1LPlO1e48QeV1Lc3NMZ?usp=drive_link)
