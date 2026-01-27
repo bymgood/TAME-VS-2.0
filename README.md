@@ -45,7 +45,7 @@ tar -xvzf chembl_36_sqlite.tar.gz
 To use the included Enamine 50k compound library for final ML virtual screening, please run the followig command from **5_Virtural_screening**
 ```bash
 python Library_preparation.py -i Enamine_diversity_50K.csv -s 1 -c 2  -f Enamine_diversity_50K_morgan_1024_FP.csv
-python GNN_data_preparation.py -i Enamine_diversity_50K.csv -s 1 -c 2  -f Enamine_diversity_50K_only_gnn_dataset.csv
+python GNN_data_preparation.py -i Enamine_diversity_50K.csv -s 1 -c 2  -f Enamine_diversity_50K_only_gnn_dataset.pkl
 ```
 Moreover, we added a convert.py file to module 5_Virtual_screening. This convert.py can be used to convert a customized .sdf chemical library into the .csv format. Then the Library_preparation.py and GNN_data_preparation.py should be able to be used for fingerprints and graphs calculations.
 
