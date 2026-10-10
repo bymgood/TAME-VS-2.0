@@ -5,9 +5,7 @@
 print('Module 2: Compound collection')
 
 import argparse
-import sqlite3
 from chembl_webresource_client.new_client import new_client
-from chembl_webresource_client.settings import Settings
 import pandas as pd
 import numpy as np
 #pd.set_option('display.max_columns', None)
@@ -17,7 +15,6 @@ import numpy as np
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--input', help = "The target list for compound collection. Or simply the generated file from the Module 1", required=True)
 parser.add_argument('-f','--file_name', help = "A name to save out files...", required=True)
-parser.add_argument('-d','--database', help = "Path to the ChEMBL SQLite database file", required=True)
 args = parser.parse_args()
 
 # # Make functions
@@ -42,35 +39,13 @@ def protein_chembl_id(res):
 
     return target_chembl_id
 
-def get_compounds(target_chembl_id: str, chembl_db_path: str):
-    sql = """
-    SELECT
-        a.*,                          -- activities 
-        asy.*,                        -- assays 
-        asy.chembl_id    AS assay_chembl_id,
-        md.chembl_id     AS molecule_chembl_id,
-        td.chembl_id     AS target_chembl_id,
-        doc.chembl_id    AS doc_chembl_id,
-        md.pref_name     AS compound_name,
-        cs.canonical_smiles,
-        cs.standard_inchi,
-        cs.standard_inchi_key,
-        doc.pubmed_id,
-        doc.doi,
-        doc.title        AS doc_title,
-        td.pref_name     AS target_name
-    FROM activities a
-    JOIN assays        asy ON a.assay_id = asy.assay_id
-    JOIN molecule_dictionary md ON a.molregno = md.molregno
-    JOIN compound_structures cs ON md.molregno = cs.molregno
-    JOIN docs         doc ON asy.doc_id = doc.doc_id
-    JOIN target_dictionary td   ON asy.tid = td.tid
-    WHERE td.chembl_id = ?
-    """
-    with sqlite3.connect(chembl_db_path) as conn:
-        df = pd.read_sql_query(sql, conn, params=[target_chembl_id])
-    print(f'{len(df)} rows returned for assay chembl_id = {target_chembl_id}')
-    return df
+def get_compounds(retrieved_id):
+    print('Collecting compounds for '+retrieved_id)
+    activity = new_client.activity
+    res = activity.filter(target_chembl_id=retrieved_id)
+    res = pd.DataFrame(res)
+    print(str(len(res))+' compounds colllected')
+    return res
 
 def analysis_to_collected_cmpds(combined):
     test_type=[]
@@ -153,7 +128,7 @@ for uniprot_id_one in df['uniprot id']:
     if len(res) > 0:
         chembl_id = protein_chembl_id(res)
         if chembl_id is not None: 
-            table = get_compounds(chembl_id, args.database)
+            table = get_compounds(chembl_id)
             combined = pd.concat([combined, table], ignore_index=True)
         else:
             print(f"No valid ChEMBL ID found for UniProt ID: {uniprot_id_one}")
