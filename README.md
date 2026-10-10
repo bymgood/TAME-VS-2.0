@@ -29,16 +29,6 @@ conda activate TAME_VS2
 pip install -r requirements.txt
 ```
 
-# Set up the built-in ChEMBL database
-Download the **ChEMBL 36 SQLite database** from the official EBI FTP server:
-
-> **Download link:**  
-> [https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_36/chembl_36_sqlite.tar.gz](https://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_36/chembl_36_sqlite.tar.gz)
-
-After downloading, extract the file:
-```bash
-tar -xvzf chembl_36_sqlite.tar.gz
-```
 
 
 # Preparing molecular fingerprints and molecular graphs for virtual screening
